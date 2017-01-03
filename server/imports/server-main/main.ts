@@ -1,9 +1,13 @@
 import {DemoCollection} from "../../../both/collections/demo.collection";
 import {Demo} from "../../../both/models/demo.model";
+import {Publish} from "../publish";
+
+const publish = new Publish();
 
 export class Main {
   start(): void {
     this.initFakeData();
+      publish.publish();
   }
 
   initFakeData(): void {

@@ -35,7 +35,7 @@ export class WorkplaceDetailComponent implements OnInit, OnDestroy {
         if (!this.workplace) {
             MeteorObservable.call("createworkplace", this.workplaceForm.value.name, this.workplaceForm.value.short_name, this.workplaceForm.value.color, this.workplaceForm.value.bg_color).subscribe((username) => {
                 toastr.success("Pracoviště uloženo!");
-                this.router.navigate(["workplace", username])
+                this.router.navigate(["workplace", username]);
             }, (error) => {
                 toastr.error(`Pracoviště se nepovedlo vytvořit! ${error}`, "Error!");
             });

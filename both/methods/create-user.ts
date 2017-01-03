@@ -17,7 +17,8 @@ Meteor.methods({
                 Accounts.setPassword(user._id, password);
             }
 
-            Meteor.users.update(user._id, { $set: {first_name: first_name, last_name: last_name}})}
+            Meteor.users.update(user._id, {$set: {first_name: first_name, last_name: last_name}});
+        }
         else {
             console.log("User wasn't found, propably because it was ran on client");
         }
@@ -36,7 +37,7 @@ Meteor.methods({
 
 
         if (user) {
-            Meteor.users.update(user._id, { $set: {first_name: first_name, last_name: last_name}});
+            Meteor.users.update(user._id, {$set: {first_name: first_name, last_name: last_name}});
         }
         else {
             console.log("User wasn't found, propably because it was ran on client");
