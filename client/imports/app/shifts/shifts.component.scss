@@ -1,0 +1,40 @@
+//with <3 from Yeomann!
+body { font:16px Calibri;}
+td, th {
+  margin:0;
+  border-top-width:0px;
+  white-space:nowrap;
+}
+.scroll {
+  overflow-x:scroll;
+  overflow-y:visible;
+  border: 1px solid blue;
+}
+#magic2 {
+  height: 300px;
+  margin-top: 0;
+}
+table {
+  table-layout: fixed;
+}
+.btn {
+  text-align: center;
+  border: 1px solid red;
+  width: 200px;
+}
+.thead {
+  white-space:nowrap;
+  overflow-x:hidden;
+}
+.thead div {
+  display: inline-block;
+  width: 200px;
+}
+.thead div div {
+  text-align: center;
+}
+.firstcol {
+  float: left;
+  height: 300px;
+  overflow-y:hidden;
+}
