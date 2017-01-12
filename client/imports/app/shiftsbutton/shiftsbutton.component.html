@@ -1,0 +1,27 @@
+<div class="dropdown">
+    <div
+            class="btn-sm btn-info text-xs-center"
+            style="line-height: 1.1; margin: 1px; width: 148px" data-toggle="dropdown"
+            [class.dropdown-toggle]="isAdmin"
+            [ngStyle]="{'color': user.color, 'background-color': user.bg_color}"
+            (contextmenu)="delete_self($event)"
+            (dblclick)="editNote($event)">
+        {{this.getName()}}
+        <a *ngIf="note"
+           [ngStyle]="{'color': user.color}"
+        >
+            ({{note}})
+        </a>
+    </div>
+
+    <div class="dropdown-menu" *ngIf="isAdmin">
+        <a
+                class="dropdown-item"
+                href="#"
+                *ngFor="let u of usersList | async"
+                (click)="changeUser(u._id, $event)"
+                (contextmenu)="setUser(u._id, $event)">
+            {{u.first_name}} {{u.last_name}}
+        </a>
+    </div>
+</div>
