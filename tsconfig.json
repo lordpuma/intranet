@@ -17,6 +17,9 @@
   "files": [
     "typings.d.ts"
   ],
+  "include": [
+    "./../Intranet/**/*"
+  ],
   "compileOnSave": false,
   "angularCompilerOptions": {
     "genDir": "aot",

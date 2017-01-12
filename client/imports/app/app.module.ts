@@ -13,6 +13,9 @@ import {UsersListComponent} from "./userslist/userslist.component";
 import {UserDetailsComponent} from "./userdetails/userdetails.component";
 import {WorkplaceListComponent} from "./workplacelist/workplacelist.component";
 import {WorkplaceDetailComponent} from "./workplacedetail/workplacedetail.component";
+import {WorkplaceDataService} from "./services/workplace-data.service";
+import {ShiftsButtonComponent} from "./shiftsbutton/shiftsbutton.component";
+import {ShiftsDataService} from "./services/shifts-data.service";
 
 @NgModule({
   // Components, Pipes, Directive
@@ -20,6 +23,7 @@ import {WorkplaceDetailComponent} from "./workplacedetail/workplacedetail.compon
     AppComponent,
     DemoComponent,
     ShiftsComponent,
+      ShiftsButtonComponent,
     LoginComponent,
     UsersListComponent,
     UserDetailsComponent,
@@ -32,7 +36,9 @@ import {WorkplaceDetailComponent} from "./workplacedetail/workplacedetail.compon
   ],
   // Providers
   providers: [
-    DemoDataService
+      DemoDataService,
+      ShiftsDataService,
+      WorkplaceDataService
   ],
   // Modules
   imports: [

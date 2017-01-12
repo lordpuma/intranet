@@ -10,11 +10,11 @@ import {platformBrowserDynamicTesting, BrowserDynamicTestingModule} from "@angul
 
 // Init the test framework
 TestBed.initTestEnvironment(
-  BrowserDynamicTestingModule,
-  platformBrowserDynamicTesting()
+    BrowserDynamicTestingModule,
+    platformBrowserDynamicTesting()
 );
 
-export let Mocha: { Hook: any }, mocha: { suite: { _beforeEach: any, ctx: any } };
+declare var Mocha: { Hook: any }, mocha: { suite: { _beforeEach: any, ctx: any } };
 
 const hook = new Mocha.Hook("Modified Angular beforeEach Hook", () => {
   getTestBed().resetTestingModule();

@@ -19,5 +19,31 @@
         <input type="text" class="form-control" id="exampleInputEmail3" placeholder="Příjmení"
                formControlName="last_name">
     </div>
+    <div class="form-group">
+        <label for="exampleInputEmail2">Barva</label>
+        <input style="height: 35px;" type="color" class="form-control" id="exampleInputEmail2"
+               placeholder="Křestní jméno"
+               formControlName="color">
+    </div>
+    <div class="form-group">
+        <label for="exampleInputEmail3">Pozadí</label>
+        <input style="height: 35px;" type="color" class="form-control" id="exampleInputEmail3" placeholder="Příjmení"
+               formControlName="bg_color">
+    </div>
+    <div class="form-group">
+        <label for="exampleSelect2">Pozice</label>
+        <select multiple class="form-control" id="exampleSelect2" formControlName="positions">
+            <option value="{{wp._id}}" *ngFor="let wp of workplaces | async">{{wp.name}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="exampleSelect2">Oprávnění</label>
+        <select multiple class="form-control" id="exampleSelect2" formControlName="roles">
+            <option value="admin">Administrátor</option>
+            <option value="edit-users">Spravovat uživatele</option>
+            <option value="view-shifts">Zobrazit směny</option>
+            <option value="edit-shifts">Spravovat směny</option>
+        </select>
+    </div>
     <button type="submit" class="btn btn-primary">Uložit</button>
 </form>

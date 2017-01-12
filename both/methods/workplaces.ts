@@ -3,25 +3,35 @@
  */
 import {WorkplaceCollection} from "../collections/workplace.collection";
 
+let adminUser = (userId) => {
+    return Roles.userIsInRole(userId, ["admin"]);
+};
+
 Meteor.methods({
     createworkplace: (name: string, short_name: string, color: string, bg_color: string): string => {
-        WorkplaceCollection.insert({
-            name: name,
-            short_name: short_name,
-            bg_color: bg_color,
-            color: color,
-        });
-        return name;
+        if (adminUser(Meteor.userId())) {
+            WorkplaceCollection.insert({
+                name: name,
+                short_name: short_name,
+                bg_color: bg_color,
+                color: color,
+            });
+            return name;
+        }
     },
     updateworkplace: (id: string, name: string, short_name: string, color: string, bg_color: string): void => {
-        WorkplaceCollection.upsert(id, {
-            name: name,
-            short_name: short_name,
-            bg_color: bg_color,
-            color: color,
-        });
+        if (adminUser(Meteor.userId())) {
+            WorkplaceCollection.upsert(id, {
+                name: name,
+                short_name: short_name,
+                bg_color: bg_color,
+                color: color,
+            });
+        }
     },
     removeworkplace: (id: string) => {
-        WorkplaceCollection.remove(id);
+        if (adminUser(Meteor.userId())) {
+            WorkplaceCollection.remove(id);
+        }
     },
 });

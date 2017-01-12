@@ -24,7 +24,6 @@ export class LoginComponent implements OnInit {
     }
 
     login(): void {
-        // Accounts.createUser({username: this.addForm.value.email, password: this.addForm.value.password}, (err) => console.log(err));
         Meteor.loginWithPassword(this.loginForm.value.email, this.loginForm.value.pass, (err) => {
             if (!err)
                 this.router.navigate(["/shifts"]);

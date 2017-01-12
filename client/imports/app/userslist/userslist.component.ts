@@ -13,6 +13,7 @@ import * as toastr from "toastr";
     styles: [style]
 })
 export class UsersListComponent implements OnInit, OnDestroy {
+
     constructor() {
 
     }

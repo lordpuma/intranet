@@ -7,6 +7,7 @@ const publish = new Publish();
 export class Main {
   start(): void {
     this.initFakeData();
+    this.defaultUser();
       publish.publish();
   }
 
@@ -25,6 +26,16 @@ export class Main {
       data.forEach((obj: Demo) => {
         DemoCollection.insert(obj);
       });
+    }
+  }
+
+  defaultUser(): void {
+    if (Meteor.users.find({}).count() === 0) {
+      Roles.setUserRoles(Accounts.createUser({
+        username: "admin",
+        email: "admin@admin.com",
+        password: "admin"
+      }), ["admin"]);
     }
   }
 }
