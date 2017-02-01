@@ -9,7 +9,6 @@ import {MeteorObservable} from "meteor-rxjs";
 import {WorkplaceDataService} from "../services/workplace-data.service";
 import {Shifts} from "../../../../both/models/shifts.model";
 import {ShiftsDataService} from "../services/shifts-data.service";
-import {AutorunObservable} from "angular2-meteor-rxjs";
 import {User} from "../../../../both/models/user.model";
 import * as _ from "lodash";
 import {Users} from "../../../../both/collections/users.collection";
@@ -33,13 +32,6 @@ export class ShiftsComponent implements OnInit, OnDestroy {
     users: Observable<User>;
     usersSub: Subscription;
 
-    users_sub: Subscription;
-    users_sub2: SubscriptionHandle;
-    //
-    // users = new AutorunObservable<User[]>(() => {
-    //     return Meteor.users.find({});
-    // });
-
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private workplace_service: WorkplaceDataService,
@@ -55,9 +47,6 @@ export class ShiftsComponent implements OnInit, OnDestroy {
             let date = new Date;
             this.router.navigate(["/shifts", date.toISOString().substr(0, 7)]);
         }
-        this.usersSub = MeteorObservable.subscribe("users").subscribe(() => {
-            this.users = Users.find({}).zone();
-        });
     }
 
     switchWeek(date: Date) {
@@ -83,13 +72,11 @@ export class ShiftsComponent implements OnInit, OnDestroy {
     }
 
     userById(id: Shifts) {
-        return Meteor.users.findOne(id.user_id);
+        return Users.find(id.user_id).fetch()[0];
     }
 
     usersByWorkplace(id: string) {
-        return new AutorunObservable<User[]>(() => {
-            return Meteor.users.find({positions: id});
-        });
+        return Users.find({positions: id});
     }
 
     changeUser(shift: Shifts, users: { user_old: string, user_new: string }) {
@@ -109,24 +96,22 @@ export class ShiftsComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        // this.users_sub2 = Meteor.subscribe("users");
+        this.usersSub = MeteorObservable.subscribe("users").subscribe();
         this.shifts_sub = MeteorObservable.subscribe("shifts").subscribe();
         this.shifts = this.shifts_service.getData();
         this.workplaces_sub = MeteorObservable.subscribe("workplaces").subscribe();
         this.workplaces = this.workplace_service.getData();
-        $("#magic2").on("scroll", function () {
+        $("#magic2").on("scroll", _.throttle(function()
+        {
             $("#magic1").scrollLeft($(this).scrollLeft());
             $("#magic3").scrollTop($(this).scrollTop());
-        });
-        // this.users_sub = this.users.subscribe();
-        // MeteorObservable.call("createshift").subscribe((done) => console.log(done, "done"));
+        }, 200));
     }
 
     ngOnDestroy() {
-        // this.users_sub2.stop();
         this.workplaces_sub.unsubscribe();
         this.parameter_sub.unsubscribe();
         this.shifts_sub.unsubscribe();
-        // this.users_sub.unsubscribe();
+        this.usersSub.unsubscribe();
     }
 }
