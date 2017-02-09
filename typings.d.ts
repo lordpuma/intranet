@@ -127,3 +127,6 @@ declare namespace Chai {
     always: SpyCalledAlways;
   }
 }
+
+declare var Roles: any;
+declare var Role: any;

@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-toggleable-sm" id="navbarResponsive">
         <div class="container">
-            <a class="navbar-brand" [routerLink]="['']">Navbar</a>
+            <a class="navbar-brand" [routerLink]="['']">Intranet</a>
             <ul class="nav navbar-nav" *ngIf="user">
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link" [routerLink]="['/shifts']">Směny</a>
@@ -19,7 +19,7 @@
             </ul>
             <ul class="nav navbar-nav pull-xs-right" *ngIf="user">
                 <li class="nav-item" routerLinkActive="active">
-                    <a class="nav-link" [routerLink]="['/']">{{user.username}}</a>
+                    <a class="nav-link" [routerLink]="['/']">{{displayname()}}</a>
                 </li>
                 <li class="nav-item" routerLinkActive="active">
                     <a class="nav-link btn btn-danger-outline" (click)="logout()">Odhlásit</a>
@@ -69,6 +69,6 @@
     <hr>
 
     <footer>
-        <p><i class="fa fa-copyright" aria-hidden="true"></i> Company 2017</p>
+        <p><i class="fa fa-copyright" aria-hidden="true"></i> Korený-racing s.r.o. 2017</p>
     </footer>
 </div>

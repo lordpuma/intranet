@@ -4,7 +4,7 @@
   "scripts": {
     "start": "meteor run",
     "start:prod": "meteor run --production",
-    "build": "meteor build ./build/",
+    "build": "meteor build --architecture=os.linux.x86_64 /c/Users/Puma/Desktop/meteor/",
     "clear": "meteor reset",
     "meteor:update": "meteor update --all-packages",
     "test": "meteor test --driver-package practicalmeteor:mocha",

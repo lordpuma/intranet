@@ -43,5 +43,16 @@ export class Publish {
                 });
             }
         });
+        Meteor.publish("user-profile", function () {
+                return Meteor.users.find(this.userId, {
+                    fields: {
+                        first_name: 1,
+                        last_name: 1,
+                        color: 1,
+                        bg_color: 1,
+                        profile: 1
+                    }
+                });
+        });
     }
 }

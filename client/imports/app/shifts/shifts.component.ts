@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from "@angular/core";
+import {Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener} from "@angular/core";
 import template from "./shifts.component.html";
 import style from "./shifts.component.scss";
 import * as $ from "jquery";
@@ -13,6 +13,7 @@ import {User} from "../../../../both/models/user.model";
 import * as _ from "lodash";
 import {Users} from "../../../../both/collections/users.collection";
 import SubscriptionHandle = Meteor.SubscriptionHandle;
+import * as moment from "moment";
 
 @Component({
     selector: "shifts",
@@ -20,6 +21,10 @@ import SubscriptionHandle = Meteor.SubscriptionHandle;
     styles: [style]
 })
 export class ShiftsComponent implements OnInit, OnDestroy {
+    @ViewChild("magic1") private magic1: ElementRef;
+    @ViewChild("magic2") private magic2: ElementRef;
+    @ViewChild("magic3") private magic3: ElementRef;
+
     month: string;
     workplaces: Observable<Workplace[]>;
     workplaces_sub: Subscription;
@@ -28,6 +33,7 @@ export class ShiftsComponent implements OnInit, OnDestroy {
     parameter_sub: Subscription;
     shifts: Observable<Shifts[]>;
     shifts_sub: Subscription;
+    timeout: number = 0;
 
     users: Observable<User>;
     usersSub: Subscription;
@@ -51,6 +57,15 @@ export class ShiftsComponent implements OnInit, OnDestroy {
 
     switchWeek(date: Date) {
         this.router.navigate(["/shifts", date.toISOString().substr(0, 7)]);
+    }
+
+    isWeekend(day: number) {
+        let mmnt = moment().year(Number(this.month.slice(0, 4))).month(this.month.slice(5)).date(day);
+        return mmnt.day() === 0 || mmnt.day() === 6;
+    }
+
+    bgc(day: number) {
+        return this.isWeekend(day) ? "#999" : "#FFF";
     }
 
     daysInMonth(date) {
@@ -93,6 +108,14 @@ export class ShiftsComponent implements OnInit, OnDestroy {
         MeteorObservable.call("removeshift", shift._id).subscribe(() => {
         }, (err) => console.log(err));
     }
+    scroll() {
+        this.magic1.nativeElement.scrollLeft = this.magic2.nativeElement.scrollLeft;
+        this.magic3.nativeElement.scrollTop = this.magic2.nativeElement.scrollTop;
+        this.timeout = 0;
+    }
+    scroll2() {
+        this.timeout = setTimeout(this.scroll(), 2000);
+    }
 
 
     ngOnInit() {
@@ -101,11 +124,6 @@ export class ShiftsComponent implements OnInit, OnDestroy {
         this.shifts = this.shifts_service.getData();
         this.workplaces_sub = MeteorObservable.subscribe("workplaces").subscribe();
         this.workplaces = this.workplace_service.getData();
-        $("#magic2").on("scroll", _.throttle(function()
-        {
-            $("#magic1").scrollLeft($(this).scrollLeft());
-            $("#magic3").scrollTop($(this).scrollTop());
-        }, 200));
     }
 
     ngOnDestroy() {
