@@ -26,8 +26,8 @@ export class ShiftsButtonComponent implements OnInit {
     @Input() note: string = "";
     @Input() id: string = "";
     @Input() usersList: Observable<User[]>;
-    @Output() onChange = new EventEmitter<boolean>();
-    @Output() onCreate = new EventEmitter<boolean>();
+    @Output() onChange = new EventEmitter<{user_new: string, user_old: string}>();
+    @Output() onCreate = new EventEmitter<string>();
     @Output() onDelete = new EventEmitter<boolean>();
     @Output() onNote = new EventEmitter<boolean>();
     isAdmin: boolean;

@@ -1,32 +1,37 @@
 <div class="row">
     <input #week type="month" (change)="switchWeek(week.valueAsDate)" value="{{month}}" class="form-control"
            style="margin: 5px;">
-    <div class="col-xs-2 col-md-1"></div>
-    <div class="thead scroll" id="magic1" #magic1>
-        <div>
-            <div *ngFor="let workplace of workplaces | async">{{workplace.name}}</div>
-        </div>
-    </div>
+    <!--<div class="col-xs-2 col-md-1"></div>-->
+    <!--<div class="thead scroll" id="magic1" #magic1>-->
+        <!--<div>-->
+            <!--<div *ngFor="let workplace of workplaces | async">{{workplace.name}}</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
-    <div style="overflow: hidden;">
-        <div class="firstcol scroll col-xs-2 col-md-1" id="magic3" #magic3 style="padding: 0px">
-            <div>
-                <div *ngFor="let d of days"
-                     [ngStyle]="{'height': ((getUserCountAll(d)*27) - (getUserCountAll(d) - 1)*3) + 'px', 'background-color': bgc(d)}"
-                     style="border: 1px solid black; text-align: right"
-                >{{d}}</div>
-            </div>
-        </div>
+    <!--<div style="overflow: hidden;">-->
+        <!--<div class="firstcol scroll col-xs-2 col-md-1" id="magic3" #magic3 style="padding: 0px">-->
+            <!--<div>-->
+                <!--<div *ngFor="let d of days"-->
+                     <!--[ngStyle]="{'height': ((getUserCountAll(d)*27) - (getUserCountAll(d) - 1)*3) + 'px', 'background-color': bgc(d)}"-->
+                     <!--style="border: 1px solid black; text-align: right"-->
+                <!--&gt;{{d}}</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
-        <div class="scroll"
-             id="magic2"
-             #magic2
-             (scroll)="scroll2()"
-        >
+        <!--<div class="scroll"-->
+             <!--id="magic2"-->
+             <!--#magic2-->
+             <!--(scroll)="scroll2()"-->
+        <!--&gt;-->
             <table>
+                <thead class="sticky-top thead">
+                    <th>Dat.</th>
+                    <th *ngFor="let workplace of workplaces | async" class="text-xs-center brdr">{{workplace.name}}</th>
+                </thead>
                 <tbody>
                 <tr *ngFor="let d of days" style="border: 2px solid black">
-                    <td *ngFor="let workplace of workplaces | async" style="vertical-align:top">
+                    <td class="sticky-left thead">{{d}}</td>
+                    <td *ngFor="let workplace of workplaces | async" style="vertical-align:middle">
                         <div *ngIf="getUserCount(workplace._id, d) > 0">
                             <shiftsbutton *ngFor="let user of getUsers(workplace._id, d)"
                                           [usersList]="usersByWorkplace(workplace._id)"
@@ -45,7 +50,11 @@
                     </td>
                 </tr>
                 </tbody>
+                <tfoot class="sticky-bottom thead">
+                    <th>Dat.</th>
+                    <th *ngFor="let workplace of workplaces | async" class="text-xs-center brdr">{{workplace.name}}</th>
+                </tfoot>
             </table>
-        </div>
-    </div>
+        <!--</div>-->
+    <!--</div>-->
 </div>

@@ -1,0 +1,38 @@
+.sticky-top {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 2;
+}
+
+.sticky-left {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  left: 0px;
+  z-index: 1;
+}
+
+.sticky-bottom {
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  position: -o-sticky;
+  position: -ms-sticky;
+  position: sticky;
+  bottom: 0px;
+  z-index: 3;
+}
+
+.thead {
+  background: #FFFFFF;
+  border: 2px solid black;
+}
+
+.brdr {
+  border: 2px solid black;
+}

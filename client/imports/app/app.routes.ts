@@ -5,6 +5,7 @@ import {UsersListComponent} from "./userslist/userslist.component";
 import {UserDetailsComponent} from "./userdetails/userdetails.component";
 import {WorkplaceListComponent} from "./workplacelist/workplacelist.component";
 import {WorkplaceDetailComponent} from "./workplacedetail/workplacedetail.component";
+import {RacesComponent} from "./races/races.component";
 
 export const routes: Route[] = [
     {path: "", component: DemoComponent},
@@ -13,6 +14,7 @@ export const routes: Route[] = [
     {path: "users", component: UsersListComponent},
     {path: "user/:id", component: UserDetailsComponent},
     {path: "user", component: UserDetailsComponent},
+    {path: "races", component: RacesComponent},
     {path: "workplaces", component: WorkplaceListComponent},
     {path: "workplace", component: WorkplaceDetailComponent},
     {path: "workplace/:id", component: WorkplaceDetailComponent},

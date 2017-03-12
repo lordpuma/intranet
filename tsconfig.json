@@ -18,7 +18,8 @@
     "typings.d.ts"
   ],
   "include": [
-    "./../Intranet/**/*"
+    "./**/*",
+    "./node_modules/@typings/**/*.ts"
   ],
   "compileOnSave": false,
   "angularCompilerOptions": {

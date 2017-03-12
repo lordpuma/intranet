@@ -4,6 +4,7 @@
 import {DemoCollection} from "../../both/collections/demo.collection";
 import {WorkplaceCollection} from "../../both/collections/workplace.collection";
 import {ShiftsCollection} from "../../both/collections/shifts.collection";
+import {RaceCollection} from "../../both/collections/race.collection";
 
 let adminUser = (userId) => {
     return Role.userIsInRole(userId, ["edit-shifts", "admin"]);
@@ -22,6 +23,11 @@ export class Publish {
         Meteor.publish("shifts", function () {
             if (Roles.userIsInRole(this.userId, ["view-shifts", "admin"])) {
                 return ShiftsCollection.find({});
+            }
+        });
+        Meteor.publish("races", function () {
+            if (Roles.userIsInRole(this.userId, ["view-shifts", "admin"])) {
+                return RaceCollection.find({});
             }
         });
         Meteor.publish("users-admin", function () {

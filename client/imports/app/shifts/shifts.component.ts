@@ -21,10 +21,6 @@ import * as moment from "moment";
     styles: [style]
 })
 export class ShiftsComponent implements OnInit, OnDestroy {
-    @ViewChild("magic1") private magic1: ElementRef;
-    @ViewChild("magic2") private magic2: ElementRef;
-    @ViewChild("magic3") private magic3: ElementRef;
-
     month: string;
     workplaces: Observable<Workplace[]>;
     workplaces_sub: Subscription;
@@ -33,7 +29,6 @@ export class ShiftsComponent implements OnInit, OnDestroy {
     parameter_sub: Subscription;
     shifts: Observable<Shifts[]>;
     shifts_sub: Subscription;
-    timeout: number = 0;
 
     users: Observable<User>;
     usersSub: Subscription;
@@ -108,15 +103,6 @@ export class ShiftsComponent implements OnInit, OnDestroy {
         MeteorObservable.call("removeshift", shift._id).subscribe(() => {
         }, (err) => console.log(err));
     }
-    scroll() {
-        this.magic1.nativeElement.scrollLeft = this.magic2.nativeElement.scrollLeft;
-        this.magic3.nativeElement.scrollTop = this.magic2.nativeElement.scrollTop;
-        this.timeout = 0;
-    }
-    scroll2() {
-        this.timeout = setTimeout(this.scroll(), 2000);
-    }
-
 
     ngOnInit() {
         this.usersSub = MeteorObservable.subscribe("users").subscribe();

@@ -1,0 +1,5 @@
+node_modules
+.meteor/dev_bundle
+.meteor/local
+
+#docker run -d -e MAIL_URL=smtp://postmaster@domain.com:rnd@smtp.mailgun.org:587 -p 80:3000 --name meteor lordpuma/meteord

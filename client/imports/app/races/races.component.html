@@ -1,0 +1,27 @@
+<h2>Aktivní: <a (click)="deactivate()" *ngFor="let a of active | async"> {{a.name}}</a></h2>
+<div class="row">
+    <table class="table table-bordered">
+        <thead>
+            <th>Název</th>
+            <th>Aktivovat</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let race of data | async">
+                <td>{{race.name}}</td>
+                <td><a (click)="activate(race._id)">Aktivovat</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<form class="form-inline" (submit)="save()" [formGroup]="form">
+    <label class="sr-only" for="name">Název</label>
+    <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="name" placeholder="Závod 1" formControlName="name">
+
+    <div class="form-check mb-2 mr-sm-2 mb-sm-0">
+        <label class="form-check-label">
+            <input class="form-check-input" type="checkbox" id="active" formControlName="active"> Aktivovat
+        </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Uložit</button>
+</form>
