@@ -18,6 +18,7 @@ import {ShiftsButtonComponent} from "./shiftsbutton/shiftsbutton.component";
 import {ShiftsDataService} from "./services/shifts-data.service";
 import {RacesDataService} from "./races/races-data.service";
 import {RacesComponent} from "./races/races.component";
+import { ResultsComponent } from './results/results.component';
 
 @NgModule({
   // Components, Pipes, Directive
@@ -31,7 +32,8 @@ import {RacesComponent} from "./races/races.component";
     UsersListComponent,
     UserDetailsComponent,
     WorkplaceListComponent,
-    WorkplaceDetailComponent
+    WorkplaceDetailComponent,
+    ResultsComponent
   ],
   // Entry Components
   entryComponents: [
