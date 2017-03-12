@@ -1,0 +1,6 @@
+<div class="form-group">
+  <select class="form-control" id="exampleSelect1" [(ngModel)]="selected">
+    <option *ngFor="let race of races | async" [value]="race._id">{{race.name}}</option>
+  </select>
+</div>
+{{selected}}

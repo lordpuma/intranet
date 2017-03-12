@@ -30,8 +30,8 @@
                 </thead>
                 <tbody>
                 <tr *ngFor="let d of days" style="border: 2px solid black">
-                    <td class="sticky-left thead">{{d}}</td>
-                    <td *ngFor="let workplace of workplaces | async" style="vertical-align:middle">
+                    <td class="sticky-left thead" [ngStyle]="{'background-color': bgc(d)}">{{d}}</td>
+                    <td *ngFor="let workplace of workplaces | async" style="vertical-align:top">
                         <div *ngIf="getUserCount(workplace._id, d) > 0">
                             <shiftsbutton *ngFor="let user of getUsers(workplace._id, d)"
                                           [usersList]="usersByWorkplace(workplace._id)"

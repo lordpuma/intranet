@@ -2,7 +2,6 @@ import {Component, OnInit, OnDestroy} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {Subscription} from "rxjs/Subscription";
 import {RacesDataService} from "./races-data.service";
-import {Demo} from "../../../../both/models/demo.model";
 import {MeteorObservable} from "meteor-rxjs";
 import template from "./races.component.html";
 import style from "./races.component.scss";
@@ -15,7 +14,6 @@ import {Race} from "../../../../both/models/race.model";
   styles: [ style ]
 })
 export class RacesComponent implements OnInit, OnDestroy {
-  greeting: string;
   data: Observable<Race[]>;
   subscription: Subscription;
   form: FormGroup;
@@ -48,7 +46,8 @@ export class RacesComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       name: [""],
       active: [""],
-    })
+    });
+    console.log(this.racesDataService.test());
   }
 
   ngOnDestroy() {

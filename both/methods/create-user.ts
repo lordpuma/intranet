@@ -1,3 +1,4 @@
+import {RaceCollection} from "../collections/race.collection";
 /**
  * Created by Puma on 02-Jan-17.
  */
@@ -83,4 +84,10 @@ Meteor.methods({
             Meteor.users.remove(id);
         }
     },
+
+    // test: () => {
+    //     if (Meteor.isServer)
+    //         RaceCollection.collection.rawCollection().aggregate({}, {}).each(result => console.log(result)); // WHICH WORKS
+    //     return true;
+    // }
 });

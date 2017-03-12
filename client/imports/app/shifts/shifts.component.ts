@@ -1,7 +1,6 @@
 import {Component, OnInit, OnDestroy, ElementRef, ViewChild, HostListener} from "@angular/core";
 import template from "./shifts.component.html";
 import style from "./shifts.component.scss";
-import * as $ from "jquery";
 import {Router, ActivatedRoute} from "@angular/router";
 import {Observable, Subscription} from "rxjs";
 import {Workplace} from "../../../../both/models/workplace.model";
@@ -14,6 +13,7 @@ import * as _ from "lodash";
 import {Users} from "../../../../both/collections/users.collection";
 import SubscriptionHandle = Meteor.SubscriptionHandle;
 import * as moment from "moment";
+import {months} from 'moment';
 
 @Component({
     selector: "shifts",
@@ -54,12 +54,12 @@ export class ShiftsComponent implements OnInit, OnDestroy {
         this.router.navigate(["/shifts", date.toISOString().substr(0, 7)]);
     }
 
-    isWeekend(day: number) {
+    isWeekend(day: number): boolean {
         let mmnt = moment().year(Number(this.month.slice(0, 4))).month(this.month.slice(5)).date(day);
         return mmnt.day() === 0 || mmnt.day() === 6;
     }
 
-    bgc(day: number) {
+    bgc(day: number): string {
         return this.isWeekend(day) ? "#999" : "#FFF";
     }
 
@@ -105,10 +105,10 @@ export class ShiftsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.usersSub = MeteorObservable.subscribe("users").subscribe();
-        this.shifts_sub = MeteorObservable.subscribe("shifts").subscribe();
-        this.shifts = this.shifts_service.getData();
-        this.workplaces_sub = MeteorObservable.subscribe("workplaces").subscribe();
+        this.usersSub = MeteorObservable.subscribe("users-shifts").subscribe();
+        this.shifts_sub = MeteorObservable.subscribe("shifts", this.month).subscribe();
+        this.shifts = this.shifts_service.getData().filter((d) => d[0].month == this.month);
+        this.workplaces_sub = MeteorObservable.subscribe("workplaces-shifts").subscribe();
         this.workplaces = this.workplace_service.getData();
     }
 
